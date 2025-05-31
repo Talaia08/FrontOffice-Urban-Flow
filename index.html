@@ -715,30 +715,18 @@
           method: "POST",
           body: formData
         })
-        .then(res => res.text()) // lê resposta como texto
+        .then(res => res.text())
         .then(text => {
-          console.log("Resposta bruta do PHP:", text);
           let data;
-    
           try {
             data = JSON.parse(text);
           } catch (e) {
             throw new Error("Erro ao converter JSON: " + e.message);
           }
-    
+
           if (data.status === "success") {
-            const userMessage = {
-              nome: formData.get('name'),
-              email: formData.get('email'),
-              assunto: formData.get('subject'),
-              mensagem: formData.get('message'),
-              data: new Date().toISOString()
-            };
-
-            let mensagens = JSON.parse(localStorage.getItem('mensagens')) || [];
-            mensagens.push(userMessage);
-            localStorage.setItem('mensagens', JSON.stringify(mensagens));
-
+            // Só guarda localmente se o envio foi bem-sucedido
+            guardarMensagemLocal();
             sentMessage.style.display = "block";
             errorMessage.style.display = "none";
             form.reset();
@@ -750,8 +738,15 @@
         })
         .catch(err => {
           console.error("Erro:", err);
+          // Só guarda localmente se o envio falhou
+          guardarMensagemLocal();
+          errorMessage.textContent = "A sua mensagem foi enviada com sucesso!";
+          errorMessage.style.display = "block";
+          sentMessage.style.display = "none";
+        });
 
-          // Guardar mensagem localmente mesmo que o PHP falhe
+        // Função para guardar mensagem localmente só uma vez
+        function guardarMensagemLocal() {
           const userMessage = {
             nome: formData.get('name'),
             email: formData.get('email'),
@@ -759,15 +754,10 @@
             mensagem: formData.get('message'),
             data: new Date().toISOString()
           };
-
           let mensagens = JSON.parse(localStorage.getItem('mensagens')) || [];
           mensagens.push(userMessage);
           localStorage.setItem('mensagens', JSON.stringify(mensagens));
-
-          errorMessage.textContent = "A sua mensagem foi enviada com sucesso!";
-          errorMessage.style.display = "block";
-          sentMessage.style.display = "none";
-        });
+        }
       });
     });
     </script>
