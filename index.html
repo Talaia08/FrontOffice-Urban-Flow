@@ -316,7 +316,7 @@
           <p>Acede à app e reporta ocorrências em tempo real.</p>
           <p>Torna a cidade mais eficiente e acessível.</p>
           <p class="small-text">Disponível para iOS e Android</p>
-          <a class="app-btn" href="http://localhost:8080/">Acede à nossa App</a>
+          <a class="app-btn" href="https://talaia08.github.io/PWA-Urban-Flow/">Acede à nossa App</a>
         </div>
         <div class="mockup-images">
           <img src="assets/img/mockupapp1.png" alt="Mockup da app 1">
@@ -735,17 +735,17 @@
     
           if (data.status === "success") {
             const userMessage = {
-              name: formData.get('name'),
+              nome: formData.get('name'),
               email: formData.get('email'),
-              subject: formData.get('subject'),
-              message: formData.get('message'),
-              timestamp: new Date().toISOString()
+              assunto: formData.get('subject'),
+              mensagem: formData.get('message'),
+              data: new Date().toISOString()
             };
-    
-            let messages = JSON.parse(localStorage.getItem('contactMessages')) || [];
-            messages.push(userMessage);
-            localStorage.setItem('contactMessages', JSON.stringify(messages));
-    
+
+            let mensagens = JSON.parse(localStorage.getItem('mensagens')) || [];
+            mensagens.push(userMessage);
+            localStorage.setItem('mensagens', JSON.stringify(mensagens));
+
             sentMessage.style.display = "block";
             errorMessage.style.display = "none";
             form.reset();
@@ -757,7 +757,21 @@
         })
         .catch(err => {
           console.error("Erro:", err);
-          errorMessage.textContent = "Ocorreu um erro ao enviar o formulário.";
+
+          // Guardar mensagem localmente mesmo que o PHP falhe
+          const userMessage = {
+            nome: formData.get('name'),
+            email: formData.get('email'),
+            assunto: formData.get('subject'),
+            mensagem: formData.get('message'),
+            data: new Date().toISOString()
+          };
+
+          let mensagens = JSON.parse(localStorage.getItem('mensagens')) || [];
+          mensagens.push(userMessage);
+          localStorage.setItem('mensagens', JSON.stringify(mensagens));
+
+          errorMessage.textContent = "Ocorreu um erro ao enviar o formulário, mas a mensagem foi guardada localmente.";
           errorMessage.style.display = "block";
           sentMessage.style.display = "none";
         });
