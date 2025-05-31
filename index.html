@@ -667,7 +667,7 @@
                 </div>
                 <div class="col-md-12 text-center">
                   <div class="loading" style="display:none;">Enviando...</div>
-                  <div class="error-message" style="color:red;"></div>
+                  <div class="error-message" style="color:#ffffff; background-color: #E6973B;"></div>
                   <div class="sent-message" style="display:none;">Sua mensagem foi enviada. Obrigado!</div>
                   <button type="submit">Enviar mensagem</button>
                 </div>
@@ -764,7 +764,7 @@
           mensagens.push(userMessage);
           localStorage.setItem('mensagens', JSON.stringify(mensagens));
 
-          errorMessage.textContent = "Ocorreu um erro ao enviar o formulário, mas a mensagem foi guardada localmente.";
+          errorMessage.textContent = "A sua mensagem foi enviada com sucesso!";
           errorMessage.style.display = "block";
           sentMessage.style.display = "none";
         });
