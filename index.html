@@ -451,7 +451,7 @@
                                 <img src="assets/img/1.jpg" alt="Ocorrências">
                             </div>
                             <div class="stat-content">
-                                <div><span data-purecounter-start="0" data-purecounter-end="120" data-purecounter-duration="1" class="purecounter">120</span></div>
+                                <div><span data-purecounter-start="0" data-purecounter-end="120" data-purecounter-duration="1" class="purecounter">20</span></div>
                                 <div class="stat-description">Ocorrências relativas a 2025</div>
                             </div>
                         </div>
@@ -471,7 +471,7 @@
                                 <img src="assets/img/3.jpg" alt="Auditorias">
                             </div>
                             <div class="stat-content">
-                                <div><span data-purecounter-start="0" data-purecounter-end="90" data-purecounter-duration="1" class="purecounter">90</span></div>
+                                <div><span data-purecounter-start="0" data-purecounter-end="90" data-purecounter-duration="1" class="purecounter">15</span></div>
                                 <div class="stat-description">Auditorias realizadas em 2025</div>
                             </div>
                         </div>
@@ -481,7 +481,7 @@
                                 <i class="bi bi-people"></i>
                             </div>
                             <div class="stat-content">
-                                <div><span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter">15</span></div>
+                                <div><span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter">10</span></div>
                                 <div class="stat-description">Peritos a trabalhar connosco</div>
                             </div>
                         </div>
@@ -651,35 +651,28 @@
           </div>
 
           <div class="col-lg-8">
-
-            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-offset="-400">
+            <form id="contactForm" class="php-email-form" data-aos="fade-up" data-aos-offset="-400">
               <div class="row gy-4">
-
                 <div class="col-md-6">
-                  <input type="text" name="name" class="form-control" placeholder="Nome" required="">
+                  <input type="text" name="name" class="form-control" placeholder="Nome" required>
                 </div>
-
-                <div class="col-md-6 ">
-                  <input type="email" class="form-control" name="email" placeholder="Email" required="">
+                <div class="col-md-6">
+                  <input type="email" name="email" class="form-control" placeholder="Email" required>
                 </div>
-
                 <div class="col-md-12">
-                  <input type="text" class="form-control" name="subject" placeholder="Assunto" required="">
+                  <input type="text" name="subject" class="form-control" placeholder="Assunto" required>
                 </div>
-
                 <div class="col-md-12">
-                  <textarea class="form-control" name="message" rows="6" placeholder="Messagem" required=""></textarea>
+                  <textarea name="message" class="form-control" rows="6" placeholder="Mensagem" required></textarea>
                 </div>
-
                 <div class="col-md-12 text-center">
-                  <div class="loading">Loading</div>
-                  <div class="sent-message" style="display:none;">Mensagem enviada com sucesso.</div>
-                  <div class="error-message" style="display:none;"></div>
+                  <div class="loading" style="display:none;">Enviando...</div>
+                  <div class="error-message" style="color:red;"></div>
+                  <div class="sent-message" style="display:none;">Sua mensagem foi enviada. Obrigado!</div>
                   <button type="submit">Enviar mensagem</button>
                 </div>
-
               </div>
-            </form>
+            </form>
           </div><!-- End Contact Form -->
 
         </div>

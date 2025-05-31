@@ -209,3 +209,48 @@
   document.addEventListener('scroll', navmenuScrollspy);
 
 })();
+
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const form = e.target;
+  const nome = form.name.value.trim();
+  const email = form.email.value.trim();
+  const assunto = form.subject.value.trim();
+  const mensagem = form.message.value.trim();
+
+  if (!nome || !email || !assunto || !mensagem) {
+    form.querySelector('.error-message').innerText = 'Por favor, preencha todos os campos.';
+    return;
+  }
+
+  const novaMensagem = {
+    nome,
+    email,
+    assunto,
+    mensagem,
+    data: new Date().toISOString()
+  };
+
+  // Obtem mensagens anteriores (ou cria um array vazio)
+  const mensagensSalvas = JSON.parse(localStorage.getItem('mensagens')) || [];
+
+  // Adiciona nova mensagem
+  mensagensSalvas.push(novaMensagem);
+
+  // Atualiza localStorage
+  localStorage.setItem('mensagens', JSON.stringify(mensagensSalvas));
+
+  // Limpa formulário
+  form.reset();
+
+  // Feedback ao usuário
+  form.querySelector('.loading').style.display = 'none';
+  form.querySelector('.sent-message').style.display = 'block';
+  form.querySelector('.error-message').innerText = '';
+
+  // Oculta mensagem de sucesso após 3s
+  setTimeout(() => {
+    form.querySelector('.sent-message').style.display = 'none';
+  }, 3000);
+});
